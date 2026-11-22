@@ -24,8 +24,15 @@ const config = {
 const isGitHubPages = window.location.hostname.endsWith('.github.io');
 const isProduction = window.location.hostname === 'app.electrisim.com' || isGitHubPages;
 const env = isProduction ? 'production' : 'development';
+const pagesBackendUrl = window.location.hostname === 'divyesh-khandhedia.github.io'
+    ? 'https://electrisim-backend.onrender.com'
+    : config.production.backendUrl;
 const currentConfig = isGitHubPages
-    ? { ...config.production, frontendUrl: new URL('.', window.location.href).href.replace(/\/$/, '') }
+    ? {
+        ...config.production,
+        backendUrl: pagesBackendUrl,
+        frontendUrl: new URL('.', window.location.href).href.replace(/\/$/, '')
+    }
     : config[env];
 
 
