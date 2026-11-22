@@ -144,7 +144,7 @@
         </p>
 
         <div class="buttons">
-            <a href="/" class="btn btn-primary" id="dashboard-btn">Go to Dashboard</a>
+            <a href="index.html" class="btn btn-primary">Go to Dashboard</a>
         </div>
     </div>
 
@@ -163,16 +163,6 @@
                 container.style.opacity = '1';
                 container.style.transform = 'translateY(0)';
             }, 100);
-
-            // Set correct dashboard URL based on environment
-            const dashboardBtn = document.getElementById('dashboard-btn');
-            const isProduction = !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1');
-            
-            if (isProduction) {
-                dashboardBtn.href = '/';
-            } else {
-                dashboardBtn.href = '/src/main/webapp/index.html';
-            }
         });
     </script>
 </body>

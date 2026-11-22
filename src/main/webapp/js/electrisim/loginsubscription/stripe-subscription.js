@@ -90,7 +90,7 @@ async function redirectToStripeCheckout(priceId) {
             return handleUnauthenticated();
         }
 
-        const isProd = window.location.hostname === 'app.electrisim.com';
+        const isProd = !config.isDevelopment;
         const defaultPriceId = isProd ? 'price_1RLjivAd4ULYw2Nb6oGrb9P1' : 'price_1RMDAEAd4ULYw2Nb9nhh8Wf2';
         
         console.log('Creating checkout session:', {
@@ -412,8 +412,8 @@ window.addEventListener('message', function(event) {
                             if (error.message && error.message.includes('Token expired')) {
                                 alert('Subscription activated! Your session has expired. Please log in again to continue.');
                                 // Redirect to login
-                                if (window.location.href.includes('app.electrisim.com')) {
-                                    window.location.href = '/login.html';
+                                if (!config.isDevelopment) {
+                                    window.location.href = 'login.html';
                                 }
                             } else {
                                 alert('Subscription activated but unable to refresh status. Please try refreshing the page manually.');

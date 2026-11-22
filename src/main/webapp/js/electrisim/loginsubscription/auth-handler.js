@@ -260,7 +260,7 @@ function createLoginForm(container) {
         </div>
         <button type="submit" class="submit-btn">Login</button>
         <p style="text-align:center; margin-top:10px;">
-          <a href="${config.isDevelopment ? '/src/main/webapp/forgot-password.html' : '/forgot-password.html'}">Forgot Password?</a>
+          <a href="forgot-password.html">Forgot Password?</a>
         </p>
         <div class="divider">or</div>
         <button type="button" class="google-btn">
@@ -308,9 +308,7 @@ function createLoginForm(container) {
                 }
             }));
             
-            const baseUrl = config.isDevelopment 
-                ? '/src/main/webapp/index.html'
-                : '/index.html';
+            const baseUrl = 'index.html';
             window.location.href = baseUrl;
         } catch (error) {
             // Handle OAuth-specific errors
@@ -476,9 +474,7 @@ function createRegisterForm(container) {
             console.log('Redirect intent:', redirectIntent);
             
             // Default redirect URL
-            const baseUrl = config.isDevelopment
-                ? '/src/main/webapp/index.html'
-                : '/index.html';
+            const baseUrl = 'index.html';
             console.log('Base URL:', baseUrl, 'isDevelopment:', config.isDevelopment);
             
             if (redirectIntent === 'subscribe') {
@@ -507,9 +503,7 @@ function createRegisterForm(container) {
                 // Normal registration - redirect to login with success message
                 console.log('=== NORMAL REGISTRATION (no subscribe intent) ===');
                 submitBtn.textContent = 'Success! Redirecting...';
-                const loginUrl = config.isDevelopment
-                    ? '/src/main/webapp/login.html?registered=1'
-                    : '/login.html?registered=1';
+                const loginUrl = 'login.html?registered=1';
                 console.log('Redirecting to:', loginUrl);
                 window.location.href = loginUrl;
             }
@@ -579,9 +573,7 @@ function handleSuccessfulAuth(userData) {
     trackAuthSuccess('oauth', userData.user);
     
     // Get base URL from config
-    const baseUrl = config.isDevelopment 
-        ? '/src/main/webapp/index.html'  // Development path
-        : '/index.html';                 // Production path
+    const baseUrl = 'index.html';
     
     // Redirect to main application
     window.location.href = baseUrl;

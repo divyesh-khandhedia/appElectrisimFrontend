@@ -1,11 +1,14 @@
 // exp.draw.io is deprecated (DNS_PROBE_FINISHED_NXDOMAIN). PDF export uses browser print dialog (printPdfExport in index.html).
 // For PNG/SVG export, self-host jgraph/export-server and use ?export=https://your-server/export
 window.PLANT_URL = 'REPLACE_WITH_YOUR_PLANTUML_SERVER';
-// Set the base URL explicitly for your domain
-window.DRAWIO_BASE_URL = window.location.protocol + '//' + window.location.hostname;
+// Project sites on GitHub Pages serve the app below the repository path.
+const isGitHubPages = window.location.hostname.endsWith('.github.io');
+const drawioBaseUrl = isGitHubPages
+    ? new URL('.', window.location.href).href.replace(/\/$/, '')
+    : window.location.protocol + '//' + window.location.hostname;
 // Prevent overriding by making it non-configurable
 Object.defineProperty(window, 'DRAWIO_BASE_URL', {
-    value: window.location.protocol + '//' + window.location.hostname,
+    value: drawioBaseUrl,
     writable: false,
     configurable: false
 });
@@ -39,7 +42,9 @@ urlParams['gl'] = '0';          // Disable GitLab
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function(registrations) {
         for (let registration of registrations) {
-            registration.unregister();
+            if (!isGitHubPages || registration.scope === drawioBaseUrl + '/') {
+                registration.unregister();
+            }
         }
     });
 }

@@ -21,9 +21,12 @@ const config = {
     }
   };
   
-  // Auto-detect environment based on hostname
-  const env = window.location.hostname === 'app.electrisim.com' ? 'production' : 'development';
-const currentConfig = config[env];
+const isGitHubPages = window.location.hostname.endsWith('.github.io');
+const isProduction = window.location.hostname === 'app.electrisim.com' || isGitHubPages;
+const env = isProduction ? 'production' : 'development';
+const currentConfig = isGitHubPages
+    ? { ...config.production, frontendUrl: new URL('.', window.location.href).href.replace(/\/$/, '') }
+    : config[env];
 
 
 window.ENV = currentConfig;

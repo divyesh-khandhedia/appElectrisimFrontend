@@ -70,10 +70,7 @@
                 statusElement.textContent = 'Authentication failed';
                 messageElement.innerHTML = '<div class="error">Authentication failed. Please try again.</div>';
                 setTimeout(() => {
-                    const isDevelopment = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-                    const loginUrl = isDevelopment 
-                        ? '/src/main/webapp/login.html'  // Development path
-                        : '/login.html';                 // Production path
+                    const loginUrl = 'login.html';
                     window.location.href = loginUrl;
                 }, 3000);
                 return;
@@ -111,11 +108,7 @@
 
                     // Redirect to main application
                     setTimeout(() => {
-                        // Use correct path based on environment
-                        const isDevelopment = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-                        const indexUrl = isDevelopment 
-                            ? '/src/main/webapp/index.html'  // Development path
-                            : '/index.html';                 // Production path
+                        const indexUrl = 'index.html';
                         window.location.href = indexUrl;
                     }, 2000);
 
@@ -124,10 +117,7 @@
                     statusElement.textContent = 'Authentication failed';
                     messageElement.innerHTML = '<div class="error">Invalid authentication token. Please try again.</div>';
                     setTimeout(() => {
-                        const isDevelopment = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-                        const loginUrl = isDevelopment 
-                            ? '/src/main/webapp/login.html'  // Development path
-                            : '/login.html';                 // Production path
+                        const loginUrl = 'login.html';
                         window.location.href = loginUrl;
                     }, 3000);
                 }
@@ -135,10 +125,7 @@
                 statusElement.textContent = 'No authentication token received';
                 messageElement.innerHTML = '<div class="error">No authentication token received. Please try again.</div>';
                 setTimeout(() => {
-                    const isDevelopment = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-                    const loginUrl = isDevelopment 
-                        ? '/src/main/webapp/login.html'  // Development path
-                        : '/login.html';                 // Production path
+                    const loginUrl = 'login.html';
                     window.location.href = loginUrl;
                 }, 3000);
             }
